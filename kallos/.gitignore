@@ -1,0 +1,7 @@
+# makepkg build artifacts (the wrapper builds in a tempdir, but ignore these in
+# case PKGBUILD is run directly here).
+*.pkg.tar.*
+*.log
+src/
+pkg/
+kallos-git/

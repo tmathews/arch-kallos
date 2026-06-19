@@ -1,0 +1,62 @@
+# Maintainer: Thomas Mathews <thomas.c.mathews@gmail.com>
+#
+# Packages the private Kallos desktop experience (kstart launcher + kdaemon) as a
+# pacman-tracked package built from the git HEAD of the private repo.
+#
+# The point of doing this as a PKGBUILD: `makedepends` (the toolchain + headers +
+# shader compiler) are installed only for the build and can be removed afterward,
+# while `depends` (the runtime libraries) stay. The result is owned by pacman, so
+# `pacman -Rns kallos-git` removes it cleanly.
+#
+# Build it standalone with:  makepkg -sf   (then `pacman -U` the result)
+# scripts/80-kallos.sh wraps this and prunes the build-only deps automatically.
+
+pkgname=kallos-git
+pkgver=0          # replaced at build time by pkgver()
+pkgrel=1
+pkgdesc="Kallos desktop experience: Wayland overlay launcher (kstart) + system daemon (kdaemon)"
+arch=('x86_64')
+url="https://github.com/tmathews/kstart"
+license=('custom')
+
+# Runtime shared libraries — kept after install. (vkvg/plutosvg/stb are static.)
+depends=(
+	vulkan-icd-loader fontconfig harfbuzz freetype2 libpulse dbus
+	libxkbcommon cairo openssl libnghttp2 wireless_tools wayland
+)
+
+# Build-only — installed for the build, pruned afterward by scripts/80-kallos.sh.
+# glslang/shaderc are needed because vkvg compiles its GLSL shaders to SPIR-V.
+makedepends=(
+	cmake ninja clang git pkgconf
+	vulkan-headers wayland-protocols glslang shaderc
+)
+
+provides=('kallos')
+conflicts=('kallos')
+options=('!debug')   # don't split out a -debug package
+
+# Private source over SSH — fetching it IS the access gate. vkvg is pulled from
+# its own upstream during build() (CMake ExternalProject), not listed here.
+source=("${pkgname}::git+ssh://git@github.com/tmathews/kstart.git#branch=main")
+sha256sums=('SKIP')
+
+pkgver() {
+	cd "$srcdir/$pkgname"
+	# No release tags yet → r<commit-count>.g<short-hash>
+	printf 'r%s.g%s' "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+	cd "$srcdir/$pkgname"
+	# Release preset → builds/Release; first run fetches + builds vkvg from source
+	# (needs network during build — the default makepkg BUILDENV allows this).
+	cmake --preset release
+	cmake --build --preset release
+}
+
+package() {
+	cd "$srcdir/$pkgname"
+	# Installs kstart + kdaemon -> /usr/bin, data/ -> /usr/share/kallos/data.
+	DESTDIR="$pkgdir" cmake --install builds/Release --prefix /usr
+}
