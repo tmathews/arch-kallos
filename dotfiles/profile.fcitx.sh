@@ -1,3 +1,6 @@
+export EDITOR=nvim
+export HISTSIZE=
+export HISTCONTROL=ignoreboth:erasedups
 # Wayland desktop + fcitx5 input method.
 export MOZ_ENABLE_WAYLAND=1
 export QT_QPA_PLATFORM=wayland
