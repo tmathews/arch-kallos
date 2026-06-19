@@ -10,9 +10,9 @@ cat <<'EOF'
   * Sensors:     sudo sensors-detect
   * Firmware:    fwupdmgr refresh && fwupdmgr update
   * pkgfile db:  sudo pkgfile --update
-  * Dotfiles:    clone your niri / neovim / shell configs (not managed here).
-                 If you installed Japanese support, set up fcitx5 autostart and
-                 GTK_IM_MODULE / QT_IM_MODULE / XMODIFIERS in your dotfiles.
+  * Dotfiles:    niri config + Wayland/fcitx5 env are applied by 60-dotfiles.sh.
+                 neovim / shell aliases are still personal (not managed here).
+                 Japanese: pick the engine in fcitx5-configtool after first login.
   * qrcp (optional): grab a prebuilt binary from
                  https://github.com/claudiodangelis/qrcp/releases
 ====================================================

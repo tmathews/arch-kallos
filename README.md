@@ -46,6 +46,7 @@ support. Everything else is non-interactive and safe to re-run (idempotent).
 | Fonts | `30-fonts.sh` | Download the monochrome Noto Emoji font (no AUR) |
 | Services | `40-services.sh` | Enable system + user units that exist |
 | User | `50-user.sh` | Add to `seat`/`plugdev` groups; set locale/timezone if unset |
+| Dotfiles | `60-dotfiles.sh` | Copy niri config; inject Wayland+fcitx5 env / niri launch |
 | Kallos | `80-kallos.sh` | If you can reach the private Kallos repo, build + install it |
 | Notes | `90-postnotes.sh` | Print manual follow-ups |
 
@@ -60,7 +61,31 @@ packages/
   pacman-jp.txt       gated: Japanese support
   flatpak.txt         Flathub app IDs
 scripts/NN-*.sh       numbered, idempotent steps run in order
+dotfiles/
+  niri/config.kdl     copied verbatim to ~/.config/niri/
+  profile.fcitx.sh    injected into ~/.profile (Wayland + fcitx5 env)
+  bashrc.niri.sh      injected into ~/.bashrc (start niri on TTY1)
 ```
+
+## Dotfiles (partial)
+
+`scripts/60-dotfiles.sh` manages only the pieces tied to this system setup:
+
+- **niri config** — copied verbatim from `dotfiles/niri/config.kdl` (existing one
+  is backed up if it differs).
+- **`~/.profile` and `~/.bashrc`** — a marker-delimited block is injected/updated:
+  ```sh
+  # >>> arch-kallos:<id> >>>
+  ...managed lines...
+  # <<< arch-kallos:<id> <<<
+  ```
+  Re-runs replace the block in place; **anything outside the markers — your
+  personal config and secrets — is never touched**. This is deliberate: keep
+  credentials (e.g. SVN passwords) in your own un-managed lines, never in this repo.
+
+The input-method block sets fcitx5 vars (`GTK/QT/SDL_IM_MODULE=fcitx`,
+`XMODIFIERS=@im=fcitx`) and the niri config autostarts `fcitx5`. Your editor,
+PATH, neovim/shell theming, etc. remain personal and are out of scope.
 
 ## Editing the package set
 
@@ -94,5 +119,6 @@ service to enable — bind `kstart` in your niri config (dotfiles).
 
 ## Out of scope
 
-Dotfiles (niri, neovim, shell config, fcitx5 autostart) and network config files
-(`*.network`, iwd) are not managed here — keep those in a separate dotfiles repo.
+The rest of your dotfiles (neovim config, shell aliases/prompt, fcitx5 engine
+selection) and network config files (`*.network`, iwd) are not managed here —
+keep those personal or in a separate dotfiles repo.

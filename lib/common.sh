@@ -44,6 +44,20 @@ pacman_install_list() {
   sudo pacman -S --needed --noconfirm "${pkgs[@]}"
 }
 
+# Inject (or update) a marker-delimited managed block in a file. Idempotent:
+# a prior block with the same id is removed first, then a fresh one appended, so
+# re-runs don't duplicate or drift. Personal lines outside the markers are never
+# touched. Args: file id content
+inject_block() {
+  local file="$1" id="$2" content="$3"
+  local begin="# >>> arch-kallos:${id} >>>"
+  local end="# <<< arch-kallos:${id} <<<"
+  touch "$file"
+  sed -i "\|${begin}|,\|${end}|d" "$file"   # drop any prior block (| delimiter; markers have no |)
+  sed -i '${/^[[:space:]]*$/d}' "$file"     # trim a single trailing blank line
+  printf '\n%s\n%s\n%s\n' "$begin" "$content" "$end" >> "$file"
+}
+
 # Enable systemd units that actually exist. Pass --user for the user manager.
 enable_unit_if_exists() {
   local userflag=""
