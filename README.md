@@ -12,7 +12,7 @@ Hardware drivers are auto-detected, so the same repo works across machines.
 After first boot, logged in as your normal user with a network connection:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/<user>/arch-kallos/main/setup.sh -o setup.sh
+curl -fsSL https://raw.githubusercontent.com/tmathews/arch-kallos/main/setup.sh -o setup.sh
 less setup.sh        # inspect before running
 bash setup.sh
 ```
@@ -24,12 +24,12 @@ needs installing first. `setup.sh` will install `git`, clone this repo to
 Or clone it yourself and run locally (e.g. copied via USB):
 
 ```bash
-git clone https://github.com/<user>/arch-kallos.git
+git clone https://github.com/tmathews/arch-kallos.git
 cd arch-kallos && bash setup.sh
 ```
 
-> **Before first use:** set `REPO_URL` at the top of `setup.sh` to your fork
-> (or export `ARCH_KALLOS_REPO`).
+> Using a fork? Override the clone source with `ARCH_KALLOS_REPO`
+> (or edit `REPO_URL` at the top of `setup.sh`).
 
 The run asks two yes/no questions: install common dev tools, and install Japanese
 support. Everything else is non-interactive and safe to re-run (idempotent).
