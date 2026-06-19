@@ -1,0 +1,89 @@
+# === arch-kallos core packages (always installed) ===
+# Hardware-specific drivers (microcode, GPU Vulkan, wifi, bluetooth, laptop bits)
+# are NOT listed here — scripts/15-hardware.sh auto-detects and installs those.
+
+# --- base / boot ---
+base
+base-devel
+linux
+linux-firmware
+efibootmgr
+zram-generator
+
+# --- system utilities ---
+fwupd
+lm_sensors
+dmidecode
+lshw
+pciutils
+
+# --- networking ---
+rsync
+openssh
+nmap
+reflector
+bind
+
+# --- niri / Wayland desktop ---
+niri
+swaybg
+swayidle
+swaylock
+xdg-desktop-portal
+xdg-desktop-portal-wlr
+xdg-desktop-portal-gtk
+xorg-xwayland
+xwayland-satellite
+wl-clipboard
+wf-recorder
+playerctl
+
+# --- terminal ---
+alacritty
+
+# --- audio (PipeWire) ---
+pipewire
+pipewire-alsa
+pipewire-jack
+pipewire-pulse
+wireplumber
+gst-plugin-pipewire
+alsa-utils
+libpulse
+mpv-mpris
+
+# --- editor / version control ---
+git
+git-lfs
+neovim
+
+# --- core CLI ---
+fzf
+ripgrep
+jq
+bc
+htop
+strace
+screen
+less
+pkgfile
+nvtop
+
+# --- media (native) ---
+mpv
+imv
+zathura
+
+# --- fonts ---
+noto-fonts-emoji
+ttf-fira-code
+ttf-firacode-nerd
+
+# --- peripherals ---
+solaar
+libfido2
+yubikey-manager
+yubikey-personalization
+
+# --- package / app management ---
+flatpak

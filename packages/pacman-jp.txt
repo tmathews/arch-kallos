@@ -1,0 +1,8 @@
+# Installed only when you answer YES to "Install Japanese support?"
+# fcitx5 input method + mozc engine + CJK fonts (replaces the old anthy setup).
+fcitx5
+fcitx5-configtool
+fcitx5-mozc
+fcitx5-gtk
+fcitx5-qt
+noto-fonts-cjk

@@ -1,0 +1,7 @@
+# Flathub application IDs — installed system-wide by scripts/20-flatpak.sh.
+org.mozilla.firefox
+org.chromium.Chromium
+org.gimp.GIMP
+org.kde.krita
+com.obsproject.Studio
+com.valvesoftware.Steam

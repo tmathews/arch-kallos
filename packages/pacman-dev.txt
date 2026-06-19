@@ -1,0 +1,5 @@
+# Installed only when you answer YES to "Install common dev tools?"
+clang
+gdb
+cmake
+meson
