@@ -43,6 +43,7 @@ support. Everything else is non-interactive and safe to re-run (idempotent).
 | Hardware | `15-hardware.sh` | Detect CPU/GPU/laptop/wifi/bluetooth → install the right drivers |
 | Optional | `17-optional.sh` | Prompt for dev tools / Japanese support |
 | Flatpak | `20-flatpak.sh` | Add Flathub, install `packages/flatpak.txt` |
+| Fonts | `30-fonts.sh` | Download the monochrome Noto Emoji font (no AUR) |
 | Services | `40-services.sh` | Enable system + user units that exist |
 | User | `50-user.sh` | Add to `seat`/`plugdev` groups; set locale/timezone if unset |
 | Kallos | `80-kallos.sh` | If you can reach the private Kallos repo, build + install it |

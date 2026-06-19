@@ -63,7 +63,5 @@ else
   ok "no build-only deps to prune (already wanted, or never installed)"
 fi
 
-warn "kstart renders monochrome emoji via the 'Noto Emoji' (mono) font that used to come"
-warn "from the dropped AUR package; vendor that .ttf manually if emoji look wrong."
 warn "kdaemon is spawned on demand by kstart — bind 'kstart' in your niri config (dotfiles)."
 ok "Kallos step complete"
