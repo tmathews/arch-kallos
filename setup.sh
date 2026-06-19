@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # arch-kallos — post-install provisioning for Arch Linux.
 # Run after a fresh base install + first boot, as your normal user:
-#   curl -fsSL https://raw.githubusercontent.com/<user>/arch-kallos/main/setup.sh -o setup.sh
+#   curl -fsSL https://raw.githubusercontent.com/tmathews/arch-kallos/main/setup.sh -o setup.sh
 #   bash setup.sh
 set -euo pipefail
 
