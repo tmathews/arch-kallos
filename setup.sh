@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Edit these (or override via env) to point at your fork.
-REPO_URL="${ARCH_KALLOS_REPO:-https://github.com/CHANGEME/arch-kallos.git}"
+REPO_URL="${ARCH_KALLOS_REPO:-https://github.com/tmathews/arch-kallos.git}"
 CLONE_DIR="${ARCH_KALLOS_DIR:-$HOME/.local/share/arch-kallos}"
 
 # When piped via `curl | bash` there is no checkout on disk: bootstrap by
